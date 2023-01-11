@@ -70,7 +70,6 @@ struct Application {
             update();
             render();
         }
-        
     }
 };
 
@@ -94,17 +93,10 @@ int main(int argc, char* argv[])
         }
 
     game.processValidFile(argc, argv);
-    game.render(); // to get the first line going
+    game.render(); // to get the first line going // is this okay?
     game.loop();
 
-    // if(game.fileStream.eof())
-    // {
-    //     std::cout << "The end :)" << std::endl;
-    //     exit(1);
-    // }
-   
     game.fileStream.close(); 
     std::cout << "The end :)" << std::endl;
-    
     return 0; 
 }
