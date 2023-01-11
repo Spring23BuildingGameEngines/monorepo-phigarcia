@@ -16,26 +16,9 @@ struct Application {
     
     Application() { 
     }
-    ~Application(){}
-
-    void checkValidFile(int argc, char* argv[]) {
-        for (int i = 0; i < argc; i++) {
-            if (i == 0) {
-                fileStream.open(argv[1]);
-                if (!fileStream.is_open()) {
-                    std::cout << "Please specify a valid file name." << std::endl; 
-                    exit(1);
-                }
-                else if (argc > 2) {
-                    std::cout << "Only one argument is supported." << std::endl;
-                    exit(1);
-                }
-            }   
-        }
-    }
+    ~Application(){std::cout << "The End :)" << std::endl;}
     
     void processValidFile(int argc, char* argv[]) {
-        fileStream.open(argv[1]);
         if (fileStream.is_open()){
             while(getline(fileStream,line)){
                 story.push_back(line);
@@ -64,27 +47,30 @@ struct Application {
             }
             else {
                 lineNumber -= 1;
-
             }
         }
     }   
 
     void render() {
-        // std::istringstream iss(line);
-        // iss >> lineNumber;
-
-        std::cout << story[lineNumber] << std::endl;
-        std::cout << "1. Go on.." << std::endl;
-        std::cout << "2. Go back!" << std::endl;
+        if(lineNumber >= story.size() - 1) {
+            std::cout << "The end :)   ";
+            std::cout << " =＾• ⋏ •＾= " << std::endl;
+            exit(1); // should i be using exit?
+        }
+        else {
+            std::cout << story[lineNumber] << std::endl;
+            std::cout << "1. Go on.." << std::endl;
+            std::cout << "2. Go back!" << std::endl;
+        }
     }
 
     void loop() {
-    
         while(true) {
             input();
             update();
             render();
         }
+        
     }
 };
 
@@ -92,10 +78,33 @@ int main(int argc, char* argv[])
 {
     Application game;
 
-    game.checkValidFile(argc, argv);
+    // make sure the file is valid
+    for (int i = 0; i < argc; i++) {
+            if (i == 0) {
+                game.fileStream.open(argv[1]);
+                if (!game.fileStream.is_open()) {
+                    std::cout << "Please specify a valid file name." << std::endl; 
+                    exit(1);
+                }
+                else if (argc > 2) {
+                    std::cout << "Only one argument is supported." << std::endl;
+                    exit(1);
+                }
+            }   
+        }
+
     game.processValidFile(argc, argv);
-    
-    game.loop(); 
+    game.render(); // to get the first line going
+    game.loop();
+
+    // if(game.fileStream.eof())
+    // {
+    //     std::cout << "The end :)" << std::endl;
+    //     exit(1);
+    // }
+   
     game.fileStream.close(); 
+    std::cout << "The end :)" << std::endl;
+    
     return 0; 
 }
