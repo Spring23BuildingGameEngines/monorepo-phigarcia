@@ -2,14 +2,18 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
 
-  // Making you type out this example because
-  // it will come in handy...
-  //
-  // In fact, for all these examples I picked out a 
-  // minimum subset of C++ that'll get you through
-  // the course.
+  std::vector<int> myData;
+
+  for (int i = 0; i < 39; i++) {
+    myData.push_back(i);
+  }
+
+  int* interalArray = myData.data();
+  for (int i= 0; i < myData.size(); i++) {
+    std::cout << interalArray[i] << std::endl;
+  }
 
     return 0;
 }

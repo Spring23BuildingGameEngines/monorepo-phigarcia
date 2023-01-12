@@ -4,10 +4,22 @@
 
 int main(int argc, char** argv){
 
-  // You need to understand what is going on with sizeof.
-  // This exercise exists because on average, 25% of folks
-  // are going to try to use 'sizeof' and expect to get the number
-  // of elements in a vector, rather than the size of the underlying data type.
+  std::vector<unsigned char> myVector;
 
-    return 0;
+  for(unsigned int i = 0; i < 15; i++) {
+    myVector.push_back(i); 
+  }
+
+  std::cout << "number of elements: " << myVector.size() << std::endl;
+  std::cout << "size of structure: " << sizeof(myVector) <<std::endl;
+  std::cout << "size of myVector raw data: " << sizeof(myVector.data()) << std::endl;
+
+  int rawArray[39];
+  std::cout << "locally allocated size of raw array: " << sizeof(rawArray) <<std::endl; 
+
+  int* heapArray = new int[25];
+  std::cout << "heap allocated array size of: " << sizeof(heapArray) << std::endl;
+  delete[] heapArray;
+
+  return 0;
 }

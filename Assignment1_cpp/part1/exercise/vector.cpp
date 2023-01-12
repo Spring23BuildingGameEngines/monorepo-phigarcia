@@ -2,12 +2,16 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
+  std::vector<unsigned char> myData;
 
-  // Understanding how to use a std::vector will probably
-  // get you through about 80% of the course.
-  // Start getting practice now by typing out the example and
-  // playing with it a bit.
+  for(unsigned int i = 39; i < 70; ++i) { // when should we use unsigned ints?
+    myData.push_back(i);
+  }
 
-    return 0;
+  for(unsigned int i = 0; i < myData.size(); ++i) {
+    std::cout << myData[i];
+  }
+
+  return 0;
 }

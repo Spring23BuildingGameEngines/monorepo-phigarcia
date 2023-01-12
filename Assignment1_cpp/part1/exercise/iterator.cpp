@@ -1,14 +1,21 @@
 // Compile with:
 // g++ -std=c++17 iterator.cpp -o prog
 #include <iostream>
+#include <vector>
 
-int main(){
+int main(int argc, char** argv) {
+	std::vector<unsigned char> myData;
 
-  	// Wow you are learning so much already by typing out these examples.
-	//
-	// Folks in the C++ world 'swear' by iterators.
-	// (And I sort of agree). But in this course, it's enough to just know they exist
-	// and you can start building a habit out of using them now.
+	for(unsigned int i = 39; i < 70; i++) {
+		myData.push_back(i);
+	}
+
+	std::vector<unsigned char>::iterator it = myData.begin();
+	std::vector<unsigned char>:: iterator end = myData.end();
+
+	for (; it != end; it++) {
+		std::cout << *it;
+	}
 
 	return 0;
 }
