@@ -67,7 +67,7 @@ public:
 	void DrawBall(SDL_Renderer *renderer);
 	void CollideWithPaddle(Contact const *contact);
 	void CollideWithWall(Contact const *contact);
-
+	//void GetBallRect(); 
 
 	Vec2 position;	
 	Vec2 velocity;

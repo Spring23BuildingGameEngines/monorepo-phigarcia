@@ -3,13 +3,14 @@
 
 #if defined(LINUX) || defined(MINGW)
 	#include <SDL2/SDL.h>
-    //#include <SDL2/SDL_ttf.h> TODO
+    #include <SDL2/SDL_ttf.h> 
 #else
-	#include <SDL.h>
-   // #include <SDL_ttf.h>
+    #include <SDL.h>
+    #include <SDL_ttf.h>
 #endif
 
 #include "Ball.hpp"
+#include "PlayerScore.hpp"
 #include "Paddle.hpp"
 
 #define WINDOW_HEIGHT 600
@@ -50,27 +51,20 @@ public:
         // Screen dimension constants
     int windowHeight = 600;
     int windowWidth = 720;
-    //TTF_Font* scoreFont = TTF_OpenFont("MinecraftRegular-Bmg3.ttf", 40);
+    TTF_Font* scoreFont = TTF_OpenFont("C:/Users/Phi/monorepo-phigarcia/Assignment2_SDL_Pong/part1/DejaVuSansMono.ttf", 40);
     Ball *ball; 
     Paddle *paddleOne;
     Paddle *paddleTwo;
+    PlayerScore *playerOneScoreText;
+    PlayerScore *playerTwoScoreText; 
+    int playerOneScore = 0;
+    int playerTwoScore = 0;
+
     float dt;
 	bool buttons[4] = {};
-    
 
-    float ballLeft;
-	float ballRight;
-	float ballTop;
-	float ballBottom;
-
-	float paddleLeft;
-	float paddleRight;
-	float paddleTop;
-	float paddleBottom;
-
-    Contact contact; 
     float paddleRangeUpper;
-	float paddleRangeMiddle;
+    float paddleRangeMiddle;
 
 private:
     bool running = true;
