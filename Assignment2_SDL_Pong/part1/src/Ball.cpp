@@ -27,23 +27,27 @@ void Ball::DrawBall(SDL_Renderer *renderer) {
 }
 
 void Ball::CollideWithPaddle(Contact const *contact)
-{
-	position.x += contact->penetration;
-	velocity.x = -velocity.x;
+	{
+		position.x += contact->penetration;
+		velocity.x = -velocity.x;
 
-	if (contact->type == CollisionType::Top)
-	{
-		velocity.y = -.75f * BALL_SPEED;
+		if (contact->type == CollisionType::Top)
+		{
+			velocity.y = -.75f * BALL_SPEED;
+		}
+		else if (contact->type == CollisionType::Bottom)
+		{
+			velocity.y = 0.75f * BALL_SPEED;
+		}
+
+       	std::cout << "Collide with paddle velocity" << velocity.x << ", " << velocity.y << std::endl;
 	}
-	else if (contact->type == CollisionType::Bottom)
-	{
-		velocity.y = 0.75f * BALL_SPEED;
-	}
-}
+
 
 void Ball::CollideWithWall(Contact const *contact)
 	{
-		if ((contact->type == CollisionType::Top) || (contact->type == CollisionType::Bottom))
+		if ((contact->type == CollisionType::Top)
+		    || (contact->type == CollisionType::Bottom))
 		{
 			position.y += contact->penetration;
 			velocity.y = -velocity.y;
@@ -64,3 +68,7 @@ void Ball::CollideWithWall(Contact const *contact)
 		}
 	}
 
+// SDL_Rect Ball::GetBallRect() 
+// {
+//     return this.
+// }

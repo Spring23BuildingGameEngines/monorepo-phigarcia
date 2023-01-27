@@ -16,7 +16,7 @@ void Paddle::DrawPaddle(SDL_Renderer* renderer)
 	paddleRect.y = static_cast<int>(position.y);
 
     SDL_RenderCopy(renderer, paddleTexture, nullptr, &paddleRect);  
-	std::cout << "paddle y" << paddleRect.y << std::endl;
+	// std::cout << "paddle y" << paddleRect.y << std::endl;
 }
 
 void Paddle::UpdatePaddle(float dt)
