@@ -91,9 +91,10 @@ Good luck!
 
 ## Task 4 - SDL Abstraction
 
-*TODO* Question: Is the SDL abstraction in your opinion good? What could be improved? You may discuss with others in the class or on piazza if you like. 
+Question: Is the SDL abstraction in your opinion good? What could be improved? You may discuss with others in the class or on piazza if you like. 
 
-Answer: 
+Answer: I think the abstraction is good. It abstracts the code into parts which you could add to if you needed it. I like how the rectangle and the SDL program were two different pieces, it makes it easier to read what's going on. However, it might've been good to also abstract the event code in the Loop function, so that you could add more to it if necessary without overwhelming the readability of the loop.
+
 
 1. *fill this in*
 

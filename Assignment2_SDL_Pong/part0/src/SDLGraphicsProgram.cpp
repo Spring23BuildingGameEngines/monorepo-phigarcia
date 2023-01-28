@@ -7,6 +7,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>       /* time */
+#include <math.h>
 
 
 // Initialization function
@@ -41,8 +42,8 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h):mScreenWidth(w),mScreenHeig
 		mWindow = SDL_CreateWindow( "Lab",
                                 SDL_WINDOWPOS_UNDEFINED,
                                 SDL_WINDOWPOS_UNDEFINED,
-                                mScreenWidth,
-                                mScreenHeight,
+                                600,
+                                600,
                                 SDL_WINDOW_SHOWN );
 
         // Check if Window did not create.
@@ -120,7 +121,7 @@ void SDLGraphicsProgram::Render(){
 
 //Loops forever!
 void SDLGraphicsProgram::Loop(){
-
+	  srand(time(NULL));
     // Main loop flag
     // If this is quit = 'true' then the program terminates.
     bool quit = false;
@@ -131,6 +132,7 @@ void SDLGraphicsProgram::Loop(){
     SDL_StartTextInput();
     // While application is running
     while(!quit){
+      Uint64 start = SDL_GetTicks();
       //Handle events on queue
       while(SDL_PollEvent( &e ) != 0){
         // User posts an event to quit
@@ -144,7 +146,14 @@ void SDLGraphicsProgram::Loop(){
       // Render
       Render();
       //Update screen of our specified window
-      // SDL_GL_SwapWindow(getSDLWindow());
+      Uint64 elapsedTime = SDL_GetTicks() - start;
+      if (elapsedTime < 16.666) {
+        SDL_Delay(16.666 - elapsedTime); 
+      }
+      
+      Uint64 trueTime = SDL_GetTicks() - start; 
+  	  std::cout << "Current FPS: " << std::to_string(1000.0f / (float)trueTime) << std::endl;
+      
     }
 
     //Disable text input
