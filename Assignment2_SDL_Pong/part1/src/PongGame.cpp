@@ -23,18 +23,18 @@ PongGame::PongGame()
 		std::cout << "SDL video system is ready to go\n";
 	}
 
- 	if(TTF_Init() == -1)
+	if (TTF_Init() == -1)
 	{
-        std::cout << "Could not initailize SDL2_ttf, error: " << TTF_GetError() << std::endl;
-    }
-	else 
-	{
-        std::cout << "SDL2_ttf system ready to go!" << std::endl;
+		std::cout << "Could not initailize SDL2_ttf, error: " << TTF_GetError() << std::endl;
 	}
-    // Confirm that it was loaded
-    if(scoreFont == nullptr){
-        std::cout << "Could not load font" <<  TTF_GetError() << std::endl;
-        exit(1);
+	else
+	{
+		std::cout << "SDL2_ttf system ready to go!" << std::endl;
+	}
+	// Confirm that it was loaded
+	if (scoreFont == nullptr)
+	{
+		std::cout << "Could not load font" << TTF_GetError() << std::endl;
 	}
 	window = SDL_CreateWindow("Pong!",
 							  0,
@@ -72,9 +72,7 @@ PongGame::PongGame()
 	paddleTwo = new Paddle((Vec2(windowWidth - 50.0f, (windowHeight / 2.0f) - (PADDLE_HEIGHT / 2.0f))),
 						   Vec2(0.0f, 0.0f),
 						   renderer);
-
-	playerOneScoreText = new PlayerScore(Vec2(windowWidth / 4, 20), renderer, scoreFont);
-	playerTwoScoreText = new PlayerScore(Vec2(3 * windowWidth / 4, 20), renderer, scoreFont);
+	std::cout << "------------------------------------" << std::endl;
 }
 
 // Proper shutdown and destroy initialized objects
@@ -85,9 +83,8 @@ PongGame::~PongGame()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	TTF_CloseFont(scoreFont);
-	TTF_Quit(); 
+	TTF_Quit();
 	SDL_Quit();
-	// TODO how to deconstruct paddles, ~Paddle or ~PaddleOne?
 }
 
 void PongGame::Input()
@@ -149,13 +146,13 @@ void PongGame::Input()
 // Update OpenGL
 void PongGame::Update()
 {
-	Contact contact = { .type = CollisionType::None, .penetration = 0.0f };
-	
+	Contact contact = {.type = CollisionType::None, .penetration = 0.0f};
+
 	// Update the paddle positions
 	paddleOne->UpdatePaddle(dt);
-	paddleTwo->UpdatePaddle(dt); // todo not moving
+	paddleTwo->UpdatePaddle(dt);
+	// update the ball position
 	ball->UpdateBall(dt);
-	// std::cout << "updated paddles and balls" << std::endl;
 
 	if (buttons[Buttons::PaddleOneUp])
 	{
@@ -199,15 +196,19 @@ void PongGame::Update()
 		ball->CollideWithWall(&contact);
 
 		if (contact.type == CollisionType::Left)
-			{
-				++playerTwoScore;
-				playerTwoScoreText->SetScore(playerTwoScore);
-			}
-			else if (contact.type == CollisionType::Right)
-			{
-				++playerOneScore;
-				playerOneScoreText->SetScore(playerOneScore);
-			}
+		{
+			++playerTwoScore;
+			std::cout << "Player Two scored!" << std::endl;
+			std::cout << playerOneScore << " - " << playerTwoScore << std::endl;
+			// playerTwoScoreText->SetScore(playerTwoScore);
+		}
+		else if (contact.type == CollisionType::Right)
+		{
+			++playerOneScore;
+			std::cout << "Player One scored!" << std::endl;
+			std::cout << playerOneScore << " - " << playerTwoScore << std::endl;
+			// playerOneScoreText->SetScore(playerOneScore);
+		}
 	}
 }
 
@@ -219,9 +220,8 @@ void PongGame::Render()
 	paddleTwo->DrawPaddle(renderer);
 	ball->DrawBall(renderer);
 
-	playerOneScoreText->DrawPlayerScore(renderer);
-	playerTwoScoreText->DrawPlayerScore(renderer);
-
+	// playerOneScoreText->DrawPlayerScore(renderer);
+	// playerTwoScoreText->DrawPlayerScore(renderer);
 }
 
 // making this because the net stays up through the entire game
@@ -245,7 +245,6 @@ Contact PongGame::CheckWallCollision(Ball const *ball)
 	float ballTop = ball->position.y;
 	float ballBottom = ball->position.y + BALL_HEIGHT;
 
-
 	if (ballLeft < 0.0f)
 	{
 		contact.type = CollisionType::Left;
@@ -266,8 +265,6 @@ Contact PongGame::CheckWallCollision(Ball const *ball)
 	}
 
 	return contact;
-
-
 }
 
 Contact PongGame::CheckPaddleCollision(Ball const *ball, Paddle const *paddle)
@@ -284,69 +281,58 @@ Contact PongGame::CheckPaddleCollision(Ball const *ball, Paddle const *paddle)
 	float paddleBottom = paddle->position.y + PADDLE_HEIGHT;
 
 	if (ballLeft <= paddleRight)
-	{	 return contact;
-
-		std::cout << "hit left paddle" << std::endl;
-		// return {.type = CollisionType::Right, .penetration = paddleRight - ballLeft};	
-	} // todo fix all these
+	{
+		return contact;
+		//std::cout << "hit left paddle" << std::endl;
+	}
 
 	if (ballRight >= paddleLeft)
-	{	return contact;
-
-		std::cout << "hit right paddle" << std::endl;
-		// return {.type = CollisionType::Left, .penetration = ballRight - paddleLeft};	
+	{
+		return contact;
+		//std::cout << "hit right paddle" << std::endl;
 	}
 
 	if (ballTop <= paddleBottom)
-	{	return contact;
-		std::cout << "hit bottom" << std::endl;
-		// return {.type = CollisionType::Bottom, .penetration = paddleBottom - ballTop};
+	{
+		return contact;
+		//std::cout << "hit bottom" << std::endl;
 	}
 
 	if (ballBottom >= paddleTop)
 	{
 		return contact;
-		// return {.type = CollisionType::Top, .penetration = ballBottom - paddleTop};	
 	}
-		
-		std::cout << "No collision" << std::endl;
+
+	//std::cout << "No collision" << std::endl;
 
 	paddleRangeUpper = paddleBottom - (2.0f * PADDLE_HEIGHT / 3.0f);
 	paddleRangeMiddle = paddleBottom - (PADDLE_HEIGHT / 3.0f);
 
 	if (ball->velocity.x < 0)
 	{
-		// Left paddle		
-		// return {.type = CollisionType::None, .penetration = paddleRight - ballLeft};
-
+		// Left paddle
 		contact.penetration = paddleRight - ballLeft;
 	}
 	else if (ball->velocity.x > 0)
 	{
 		// Right paddle
-		// return {.type = CollisionType::None, .penetration = paddleLeft - ballRight};
-
 		contact.penetration = paddleLeft - ballRight;
 	}
 
 	if ((ballBottom > paddleTop) && (ballBottom < paddleRangeUpper))
 	{
-				contact.type = CollisionType::Top;
-		// return {.type = CollisionType::Top, .penetration = 0.0f};
-		std::cout << "colliding with top paddle" << std::endl;
+		contact.type = CollisionType::Top;
+		//std::cout << "colliding with top paddle" << std::endl;
 	}
 	else if ((ballBottom > paddleRangeUpper) && (ballBottom < paddleRangeMiddle))
 	{
 		contact.type = CollisionType::Middle;
-		std::cout << "colliding with middle paddle" << std::endl;
-
-		// return {.type = CollisionType::Middle, .penetration = 0.0f};
+		//std::cout << "colliding with middle paddle" << std::endl;
 	}
 	else
 	{
 		contact.type = CollisionType::Bottom;
-		std::cout << "colliding with bottom paddle" << std::endl;
-		// return {.type = CollisionType::Bottom, .penetration = 0.0f};
+		//std::cout << "colliding with bottom paddle" << std::endl;
 	}
 	return contact;
 }
@@ -362,27 +348,41 @@ void PongGame::Loop()
 		auto startTime = std::chrono::high_resolution_clock::now();
 		SDL_RenderClear(renderer);
 
-
 		Input();
 		Update();
 
 		SDL_RenderCopy(renderer, pongTexture, NULL, &rectangle);
 		Render();
-	
+
 		SDL_RenderPresent(renderer);
 		// SDL_UpdateWindowSurface(window);
 
 		Uint64 end = SDL_GetPerformanceCounter();
 		float elapsed = ((float)end - start) / (float)SDL_GetPerformanceFrequency() / 1000.0f;
-		
-		//std::cout << "Current FPS: " << std::to_string(1.0f / elapsed) << std::endl;
-		std::cout << "ball position: " << ball->position.x << std::endl;
 
-		std::cout << "paddle1 position: " << paddleOne->position.x << std::endl;
+		if (elapsed < 16.666)
+		{
+			SDL_Delay(16.666 - elapsed);
+		}
 
-		std::cout << "paddle2 position: " << paddleTwo->position.x << std::endl;
-
-		SDL_Delay(floor(16.666f - elapsed));
+		if (playerOneScore == 3)
+		{
+			std::cout << "Player 1 wins!" << std::endl;
+			std::cout << playerOneScore << " - " << playerTwoScore << std::endl;
+			std::cout << "====================================" << std::endl;
+			std::cout << "||           GAME OVER!           ||" << std::endl;
+			std::cout << "====================================" << std::endl;
+			running = false;
+		}
+		else if (playerTwoScore == 3)
+		{
+			std::cout << "Player 2 wins!" << std::endl;
+			std::cout << playerOneScore << " - " << playerTwoScore << std::endl;
+			std::cout << "====================================" << std::endl;
+			std::cout << "||           GAME OVER!           ||" << std::endl;
+			std::cout << "====================================" << std::endl;
+			running = false;
+		}
 
 		// Calculate frame time
 		auto stopTime = std::chrono::high_resolution_clock::now();
@@ -397,7 +397,7 @@ int main(int argc, char *argv[])
 
 	pong->Loop();
 
-	delete pong; // todo can we use delete
+	delete pong;
 
 	return 0;
 }

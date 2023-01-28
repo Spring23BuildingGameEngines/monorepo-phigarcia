@@ -10,7 +10,6 @@
 #endif
 
 #include "Ball.hpp"
-#include "PlayerScore.hpp"
 #include "Paddle.hpp"
 
 #define WINDOW_HEIGHT 600
@@ -31,8 +30,9 @@ public:
     void Render();
     // render the net once and keep it there
     void RenderNet();
+    // check the wall collision
     Contact CheckWallCollision(Ball const *ball);
-
+    // check the paddle collision
     Contact CheckPaddleCollision(Ball const *ball, Paddle const *paddle);
     // loop that runs forever
     void Loop();
@@ -48,23 +48,20 @@ public:
 	SDL_Texture *pongTexture; 
     SDL_Rect rectangle;
     SDL_Rect net; // making a rectangle for the net
-        // Screen dimension constants
+    // Screen dimension constants
     int windowHeight = 600;
     int windowWidth = 720;
-    TTF_Font* scoreFont = TTF_OpenFont("C:/Users/Phi/monorepo-phigarcia/Assignment2_SDL_Pong/part1/DejaVuSansMono.ttf", 40);
+    TTF_Font* scoreFont = TTF_OpenFont("DejaVuSansMono.ttf", 40);
     Ball *ball; 
     Paddle *paddleOne;
     Paddle *paddleTwo;
-    PlayerScore *playerOneScoreText;
-    PlayerScore *playerTwoScoreText; 
     int playerOneScore = 0;
     int playerTwoScore = 0;
-
+    float paddleRangeUpper;
+    float paddleRangeLower;
+    float paddleRangeMiddle;
     float dt;
 	bool buttons[4] = {};
-
-    float paddleRangeUpper;
-    float paddleRangeMiddle;
 
 private:
     bool running = true;

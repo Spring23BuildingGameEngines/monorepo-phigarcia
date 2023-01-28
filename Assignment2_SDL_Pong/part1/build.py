@@ -17,7 +17,7 @@ LIBRARIES=""            # What libraries do we want to include
 if platform.system()=="Linux":
     ARGUMENTS="-D LINUX" # -D is a #define sent to preprocessor
     INCLUDE_DIR="-I ./include/"
-    LIBRARIES="-lSDL2 -ldl"
+    LIBRARIES="-lSDL2 -ldl -lSDL2_ttf"
 elif platform.system()=="Darwin":
     ARGUMENTS="-D MAC" # -D is a #define sent to the preprocessor.
     INCLUDE_DIR="-I ./include/ -I/Library/Frameworks/SDL2.framework/Headers"
@@ -27,7 +27,7 @@ elif platform.system()=="Windows":
     ARGUMENTS="-D MINGW -std=c++17 -static-libgcc -static-libstdc++" 
     INCLUDE_DIR="-I./include/"
     EXECUTABLE="lab.exe"
-    LIBRARIES="-lmingw32 -lSDL2main -lSDL2"
+    LIBRARIES="-lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf"
 # (2)=================== Platform specific configuration ===================== #
 
 # (3)====================== Building the Executable ========================== #

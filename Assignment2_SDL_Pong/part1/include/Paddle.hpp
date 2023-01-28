@@ -18,8 +18,10 @@ class Paddle
 {
 public:
 	Paddle(Vec2 position, Vec2 velocity, SDL_Renderer* renderer);
+	// render the paddle
 	void DrawPaddle(SDL_Renderer* renderer);
-    void UpdatePaddle(float dt); 
+    // update the paddle
+	void UpdatePaddle(float dt); 
 	Vec2 position;
     Vec2 velocity;
 
