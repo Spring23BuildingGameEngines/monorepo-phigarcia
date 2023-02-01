@@ -4,16 +4,21 @@ Read [Horde3D](http://www.horde3d.org/docs/html/_usageguide.html)'s section on R
 
 1. What are some pros and cons to having a single resource manager for all of your resources (i.e. game assets)?
 
-**Pro**: *Edit your answer here*
+**Pro**:
+*You can reuse code, which increases efficiency over large game codebases*
+**Pro**:
+*Makes resources in singleton easily accessible, regardless of where in the code base you are*
 
-**Con**: *Edit your answer here*
-
+**Con**: 
+*Singletons tend not to be thread safe, as that requires more effort from the developer to implement*
+**Con**: 
+*Singleton pattern is a global, which can be bad when they break encapsulation*
 
 2. What are some advantages of having a 'virtualized resource' in Horde3D?
 
-**Advantage 1**: *Edit your answer here*
+**Advantage 1**: *Separation of concerns, every part of the program is responsible for their own different functionalities*
 
-**Advantage 2**: *Edit your answer here*
+**Advantage 2**: *More portable, the core engine does not care about the platform or environment it is running on*
 
 
 
