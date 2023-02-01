@@ -1,4 +1,5 @@
 #include "Sprite.hpp"
+#include "ResourceManager.hpp"
 #include <iostream>
 
 // Constructor for our sprite class
@@ -6,15 +7,9 @@ Sprite::Sprite(SDL_Renderer* renderer, int x, int y, std::string image_filename)
     mXPosition = x;
     mYPosition = y;
 
-
-    // TODO: Really all you want to do is retrieve the spritesheet and
-    //       the texture from the resource manager. Make the resource
-    //       manager otherwise do all of the hard work.
-    //
-    //       Don't forget to #include your Resource Manager where it is used.
-    
     // An SDL Surface contains pixel data to draw an image
-	SDL_Surface* spriteSheet = SDL_LoadBMP(image_filename.c_str());
+	SDL_Surface* spriteSheet = ResourceManager::GetResource(image_filename);
+    
     if(spriteSheet == nullptr){
         std::cerr << image_filename << " not found!\n";
     }else{
@@ -27,12 +22,9 @@ Sprite::Sprite(SDL_Renderer* renderer, int x, int y, std::string image_filename)
     }else{
         std::cout << "SDL_Texture allocated\n";
     }
-
-    // Free surface once we are done setting up our texture
-    SDL_FreeSurface(spriteSheet);
 }
 
-// TODO:    Make sure spritesheet and texture are destroyed
+//          Make sure spritesheet and texture are destroyed
 //          but is this the right place?
 //          Consider adding a 'destroy' member function instead.
 //
@@ -42,7 +34,7 @@ Sprite::Sprite(SDL_Renderer* renderer, int x, int y, std::string image_filename)
 //          the place to know when to delete a resource.
 Sprite::~Sprite(){
     if(nullptr != mTexture){
-        // SDL_DestroyTexture(mTexture);
+        SDL_DestroyTexture(mTexture);
     }
 }
 

@@ -2,30 +2,35 @@
 #define RESOURCE_MANAGER_HPP
 
 #if defined(LINUX) || defined(MINGW)
-    #include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #else // This works for Mac
-    #include <SDL.h>
+#include <SDL.h>
 #endif
 
 // I recommend a map for filling in the resource manager
 #include <unordered_map>
 #include <string>
 
-class ResourceManager{
+class ResourceManager
+{
 public:
-    // TODO: Make constructor private 
-	ResourceManager();
-    // Destructor
-    // In theory, this is never called
-	~ResourceManager();
-    // TODO: Refactor to be a static function
-    void LoadResource(std::string image_filename);
-    // TODO: Refactor to be a static function
-    SDL_Surface* GetResource(std::string image_filename);
+    static ResourceManager& GetInstance();
+    static SDL_Surface* GetResource(std::string& image_filename); 
+    SDL_Surface* GetResourceInternal(std::string&  image_filename); // todo should this be public?
+    void LoadResource(std::string& image_filename);
+    // 'equivalent' to our constructor
+    int StartUp();
+    // 'equivalent' to our destructor
+    int ShutDown(); // call freesurface todo
 
 private:
-    SDL_Surface* mSpriteSheet;
-};
+    ResourceManager() {}
+    ResourceManager(ResourceManager const &); // Avoid copy constructor
+    void operator=(ResourceManager const &);
+    // destructor, in theory never called
+    ~ResourceManager();
 
+    std::unordered_map<std::string, SDL_Surface*> spriteMap;
+};
 
 #endif
