@@ -8,10 +8,6 @@ ResourceManager::~ResourceManager()
 {
 }
 
-// TODO: YUCK! Fix this common resource consumption error.
-//       You should use some data structure (e.g. a Map or unordered_map
-//       to first search if this resource has been loaded, and then
-//       only call SDL_LoadBMP if that resource does not previously exist.
 void ResourceManager::LoadResource(std::string &image_filename)
 {
     std::unordered_map<std::string, SDL_Surface *>::const_iterator it = spriteMap.find(image_filename);
@@ -52,6 +48,5 @@ int ResourceManager::ShutDown()
     {
         SDL_FreeSurface(it->second);
     }
-    //todo potentially add an error
     return 0;
 }
