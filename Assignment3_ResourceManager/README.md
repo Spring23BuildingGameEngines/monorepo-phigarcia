@@ -1,15 +1,11 @@
 # Your Information
 
-*TODO*: Please edit the following information in your assignment
-
-* Name: 
-* How many hours did it take you to complete this assignment? 
-* Did you collaborate or share ideas with any other students/TAs/Professors? 
+* Name: Phi Garcia
+* How many hours did it take you to complete this assignment? 4
+* Did you collaborate or share ideas with any other students/TAs/Professors? Rubber ducky with friends not in class
 * Did you use any external resources? 
-  * (tbd if any)
-  * (tbd if any)
-  * (tbd if any)
-* (Optional) What was the most interesting part of the assignment? How would you improve this assignment?
+  * Mike's youtube videos!
+* (Optional) What was the most interesting part of the assignment? How would you improve this assignment? I think it was a bit difficult to get started with the code provided. It confused me a bit.
 
 # Assignment
 
