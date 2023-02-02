@@ -23,14 +23,14 @@ void ResourceManager::LoadResource(std::string &image_filename)
     }
     else
     {
-        std::cout << image_filename << " is already loaded." << std::endl;
+        SDL_Log("%s is already loaded", image_filename.c_str());
     }
 }
 
 SDL_Surface *ResourceManager::GetResourceInternal(std::string &image_filename)
 {
     LoadResource(image_filename);
-    std::cout << "Retrieved saved copy of " << image_filename << " from GetResourceInternal" << std::endl;
+    SDL_Log("Retrieved saved copy of %s from GetResourceInternal", image_filename.c_str());
     std::unordered_map<std::string, SDL_Surface *>::const_iterator it = spriteMap.find(image_filename);
     return it->second;
 }
@@ -52,6 +52,6 @@ int ResourceManager::ShutDown()
     {
         SDL_FreeSurface(it->second);
     }
-
+    //todo potentially add an error
     return 0;
 }

@@ -14,10 +14,10 @@
 class ResourceManager
 {
 public:
-    static ResourceManager& GetInstance();
-    static SDL_Surface* GetResource(std::string& image_filename); 
-    SDL_Surface* GetResourceInternal(std::string&  image_filename); // todo should this be public?
-    void LoadResource(std::string& image_filename);
+    static ResourceManager &GetInstance();
+    static SDL_Surface *GetResource(std::string &image_filename);
+    SDL_Surface *GetResourceInternal(std::string &image_filename); 
+    void LoadResource(std::string &image_filename);
     // 'equivalent' to our constructor
     int StartUp();
     // 'equivalent' to our destructor
@@ -30,7 +30,7 @@ private:
     // destructor, in theory never called
     ~ResourceManager();
 
-    std::unordered_map<std::string, SDL_Surface*> spriteMap;
+    std::unordered_map<std::string, SDL_Surface *> spriteMap;
 };
 
 #endif

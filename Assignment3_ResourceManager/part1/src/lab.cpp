@@ -12,5 +12,6 @@ int main(int argc, char** argv){
 	mySDLGraphicsProgram.Loop();
 	// When our program ends, it will exit scope, the
 	// destructor will then be called and clean up the program.
+	ResourceManager::GetInstance().ShutDown();
 	return 0;
 }
