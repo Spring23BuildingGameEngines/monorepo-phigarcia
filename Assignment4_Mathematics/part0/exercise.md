@@ -24,4 +24,4 @@
 
 7. If I get an 'undefined reference' or 'unresolved external symbol', do you think that is a compiler error (something wrong in your code) or a linker error (some missing external dependency)? 
 
-*This is a linker error, it happens when the linker cannot find those objects or symbols.*
+*This is a linker error, it happens when the linker cannot find those functions or globals.*
