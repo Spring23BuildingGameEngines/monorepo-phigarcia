@@ -1,8 +1,5 @@
-../../../Assignment1_cpp/.vscode/
-../../../Assignment1_cpp/part2/gameloop/prog.exe
-../../../Assignment3_ResourceManager/.vscode/
-../../.vscode/
-../lab.exe
-../../../common/sprites/ball32.bmp
- ../../../common/sprites/paddle64.bmp
-../../../common/sprites/pong_bg600.bmp
+**/.vscode
+*.exe
+/common/sprites/ball32.bmp
+/common/sprites/paddle64.bmp
+/common/sprites/pong_bg600.bmp
