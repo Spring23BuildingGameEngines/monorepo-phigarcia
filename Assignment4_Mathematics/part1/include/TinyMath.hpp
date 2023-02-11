@@ -83,11 +83,7 @@ struct Vec2D
   // Multiplication Operator
   // Multiply vector by a uniform-scalar.
 
-  // TODO questions for ta:
-  // is my real constructor correct - yes
-  // how should i manipulate w within my operations
-  // is there a difference between the += and + operators and what is it
-  Vec2D &operator*=(float s)
+ Vec2D &operator*=(float s)
   {
     x = x * s;
     y = y * s;
@@ -185,7 +181,6 @@ inline Vec2D operator/(const Vec2D &v, float s)
 // Use Case: Sometimes it is handy to apply a force in an opposite direction
 inline Vec2D operator-(const Vec2D &v)
 {
-  // TODO:
   Vec2D vec;
   vec.x = -v.x;
   vec.y = -v.y;
@@ -253,7 +248,6 @@ inline Vec2D Project(const Vec2D &a, const Vec2D &b)
 // You should write this to yield a scalar value.
 inline float CrossProduct(const Vec2D &a, const Vec2D &b)
 {
-  // TODO:
   float result;
   result = (a.x * b.y) - (a.y * b.x);
   return result;
@@ -290,7 +284,6 @@ public:
     n[2][2] = 0;
   }
 
-  // TODO: Row or column major order you decide!
   // Matrix constructor with 9 scalar values.
   Matrix3D(float n00, float n01, float n02,
            float n10, float n11, float n12,
