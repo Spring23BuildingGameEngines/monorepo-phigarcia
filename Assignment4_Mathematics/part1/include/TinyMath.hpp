@@ -253,7 +253,7 @@ private:
 
 public:
   // Initializes to a identity matrix by default
-  Matrix3D() // ASK is it okay if i make this 0
+  Matrix3D()
   {
     n[0][0] = 0;
     n[0][1] = 0;
@@ -346,17 +346,12 @@ Matrix3D operator*(const Matrix3D &A, const Matrix3D &B)
 // Matrix multiply by a vector
 Vec2D operator*(const Matrix3D &M, const Vec2D &v)
 {
-  // TODO:
   Vec2D vec;
-  Matrix3D fakeMatrix;
-  Matrix3D resultMatrix;
-  fakeMatrix[0][0] = v.x;
-  fakeMatrix[1][1] = v.y;
-  fakeMatrix[2][2] = 1;
 
-  resultMatrix = M * fakeMatrix;
-  vec.x = resultMatrix(0,0) / resultMatrix(2,2);
-  vec.y = resultMatrix(1,1) / resultMatrix(2,2);
+  vec.x = (M[0][0] * v.x) + (M[1][0] * v.y) + M[2][0];
+  vec.y = (M[0][1] * v.x) + (M[1][1] * v.y) + M[2][1];
+  vec.w = v.w;
+
   return vec;
 }
 

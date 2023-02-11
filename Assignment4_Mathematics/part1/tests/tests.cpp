@@ -17,14 +17,13 @@ bool unitTest1()
     // You generally should not be printing out the
     // results here, I'm just showing this function here
     // to help you if you need to debug your vectors.
-    PrettyPrint(std::cout, result);
+    // PrettyPrint(std::cout, result);
 
     // Return false whenever a unit test is failing your
     // expected behavior
     return false;
 }
 
-// TODO
 // multiply
 bool unitTest2()
 {
@@ -36,7 +35,6 @@ bool unitTest2()
     }
     return false;
 }
-// TODO
 // divide
 bool unitTest3()
 {
@@ -48,7 +46,6 @@ bool unitTest3()
     }
     return false;
 }
-// TODO
 // add
 bool unitTest4()
 {
@@ -61,11 +58,9 @@ bool unitTest4()
     }
     return false;
 }
-// TODO
 // subtract
 bool unitTest5()
 {
-    std::cout << "Subtract: " << std::endl;
     Vec2D a(1, 2);
     Vec2D b(3, 4);
     Vec2D result = a - b;
@@ -75,20 +70,18 @@ bool unitTest5()
     }
     return false;
 }
-// TODO
+
 // normalize
 bool unitTest6()
 {
     Vec2D a(3, 4);
     Vec2D result = Normalize(a);
-    std::cout << result.x << ", " << result.y << std::endl;
     if (result.x == (.6f) && result.y == (.8f))
     {
         return true;
     }
     return false;
 }
-// TODO
 // magnitude
 bool unitTest7()
 {
@@ -100,7 +93,6 @@ bool unitTest7()
     }
     return false;
 }
-// TODO
 // 3x3 by 3x3
 bool unitTest8()
 {
@@ -120,11 +112,9 @@ bool unitTest8()
     }
     return false;
 }
-// TODO
 // dot product
 bool unitTest9()
 {
-    std::cout << "dot: " << std::endl;
     Vec2D a(4, 5);
     Vec2D b(-5, 2);
     float result = Dot(a, b);
@@ -138,18 +128,15 @@ bool unitTest9()
 // project
 bool unitTest10()
 {
-    std::cout << "Project: " << std::endl;
     Vec2D a(-1, 5);
     Vec2D b(2, 4);
     Vec2D result = Project(a, b);
-    std::cout << result.x << ", " << result.y << std::endl;
     if (result.x == 1.8f && result.y == 3.6f)
     {
         return true;
     }
     return false;
 }
-// TODO
 // negation
 bool unitTest11()
 {
@@ -161,11 +148,10 @@ bool unitTest11()
     }
     return false;
 }
-// TODO
+
 // cross product
 bool unitTest12()
 {
-    std::cout << "Cross Product: " << std::endl;
     Vec2D a(5, 5);
     Vec2D b(3, 2);
     float result = CrossProduct(a, b);
@@ -175,26 +161,22 @@ bool unitTest12()
     }
     return false;
 }
-
 // matrix x vector
 bool unitTest13()
 {
-    std::cout << "Matrix x Vector : " << std::endl;
     Vec2D a(3, 2);
-    Matrix3D M(1, 0, 6,
+    Matrix3D M(1, 2, 6,
                0, 1, 5,
                0, 0, 1);
     Vec2D result = M * a;
-        std::cout << result.x << ", " << result.y << std::endl;
 
-    if (result.x = 9 && result.y == 7)
+    if (result.x = 13 && result.y == 7 && result.w == 0)
     {
         return true;
     }
     return false;
 }
 
-// TODO: Add more tests here at your discretion
 bool (*unitTests[])(void) = {
     unitTest1,
     unitTest2,
