@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <ostream>
+#include <cassert>
 
 // Forward references of each of the structs
 struct Vec2D;
@@ -96,8 +97,16 @@ struct Vec2D
   // Division Operator
   Vec2D &operator/=(float s)
   {
-    x = x / s;
-    y = y / s;
+    if (s == 0)
+    {
+      x = NAN;
+      y = NAN;
+    }
+    else
+    {
+      x = x / s;
+      y = y / s;
+    }
     return (*this);
   }
 
@@ -157,8 +166,18 @@ inline Vec2D operator*(const Vec2D &v, float s)
 inline Vec2D operator/(const Vec2D &v, float s)
 {
   Vec2D vec;
-  vec.x = v.x / s;
-  vec.y = v.y / s;
+
+  if (s == 0)
+  {
+    vec.x = NAN;
+    vec.y = NAN;
+    return vec;
+  }
+  else
+  {
+    vec.x = v.x / s;
+    vec.y = v.y / s;
+  }
   return vec;
 }
 
@@ -184,14 +203,19 @@ inline float Magnitude(const Vec2D &v)
 // Add two vectors together
 inline Vec2D operator+(const Vec2D &a, const Vec2D &b)
 {
-  // TODO:
-  // if (a.w == 1 && b.w == 1) {
-  //   SDL_Assert(1 == 0);
-  // }
 
   Vec2D vec;
-  vec.x = a.x + b.x;
-  vec.y = a.y + b.y;
+
+  if (a.w == 1 && b.w == 1)
+  {
+    assert(0);
+  }
+  else
+  {
+    vec.x = a.x + b.x;
+    vec.y = a.y + b.y;
+  }
+
   return vec;
 }
 
