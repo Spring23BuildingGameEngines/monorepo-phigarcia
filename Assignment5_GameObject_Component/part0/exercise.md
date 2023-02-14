@@ -12,4 +12,4 @@
 2. *Physics - The goombas and pipes flying around*
 3. *Movement - Mario moving left and right, the other characters moving around*
 4. *Graphics - The rendering of the graphics to the scene*
-5. *Input - Moving Mario up and down*
+5. *Input - Providing input to the scene, such as in movement and collecting items*
