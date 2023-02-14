@@ -8,8 +8,8 @@
 
 
 
-1. *edit your response*
-2. *edit your response*
-3. *edit your response*
-4. *edit your response*
-5. *edit your response*
+1. *Audio - Mario stomping or collecting items and coins would trigger a sound*
+2. *Physics - The goombas and pipes flying around*
+3. *Movement - Mario moving left and right, the other characters moving around*
+4. *Graphics - The rendering of the graphics to the scene*
+5. *Input - Moving Mario up and down*
