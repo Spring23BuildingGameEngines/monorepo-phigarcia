@@ -1,5 +1,5 @@
 #include "Engine.hpp"
-#include "Sprite.hpp"
+#include "SpriteComponent.hpp"
 #include "TileMap.hpp"
 #include "ControllerComponent.hpp"
 // I recommend a map for filling in the resource manager
@@ -118,7 +118,7 @@ void Engine::MainGameLoop()
         // Input(&quit);
         // If you have time, implement your frame capping code here
         // Otherwise, this is a cheap hack for this lab.
-        SDL_Delay(250);
+        SDL_Delay(300);
         // Update our scene
         Update();
         // Render using OpenGL
@@ -157,16 +157,25 @@ void Engine::Start()
     // // Print out the map to the console
     // // so we can see what was created.
     myTileMap->PrintMap();
+
+    // make shared pointers
     std::shared_ptr<Component> trans = std::make_shared<TransformComponent>(TransformComponent(100, 100));
     std::shared_ptr<Component> controllerComp = std::make_shared<ControllerComponent>(ControllerComponent(trans));
+    
+    // sprite component
     SpriteComponent spriteComp(trans);
     spriteComp.LoadImage("./images/sprite.bmp", renderer); 
-    std::shared_ptr<Component> spriteComponent = std::make_shared<SpriteComponent>(SpriteComponent(trans));
+
+    // make more shared pointers
+    std::shared_ptr<Component> spriteComponent = std::make_shared<SpriteComponent>(std::move(spriteComp));
     std::shared_ptr<GameObject> playerObj = std::make_shared<GameObject>(GameObject());
 
+    // add components to object
     playerObj->AddComponent(trans);
     playerObj->AddComponent(controllerComp);
     playerObj->AddComponent(spriteComponent);
+
+    // add objects to objects
     m_gameObjects.push_back(playerObj);
 }
 
@@ -178,11 +187,11 @@ void Engine::Shutdown()
         delete mRenderer;
     }
 
-    // // Destroy our tilemap
-    // if (nullptr != myTileMap)
-    // {
-    //     delete myTileMap;
-    // }
+    // Destroy our tilemap
+    if (nullptr != myTileMap)
+    {
+        delete myTileMap;
+    }
 }
 
 void Engine::InitializeGraphicsSubSystem()

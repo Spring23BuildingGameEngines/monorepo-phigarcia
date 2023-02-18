@@ -1,5 +1,5 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef SPRITECOMPONENT_H
+#define SPRITECOMPONENT_H
 
 #include <string>
 #include <memory>
@@ -26,15 +26,13 @@ public:
         * Constructor
         */
     ~SpriteComponent();
-    // /**
-    //  * Initialize the sprite
-    //  */
-    // void SetPosition(int x, int y);
+
     /**
      * Update the sprites position and frame
      */
     void Update(int frame) override
-    {                std::cout << "sprite update" << std::endl;
+    {
+        //std::cout << "sprite update" << std::endl;
 
         TransformComponent *trans = dynamic_cast<TransformComponent *>(transformComponent.get());
         if (trans == NULL)
@@ -59,18 +57,19 @@ public:
         mDest.x = trans->x;
         mDest.y = trans->y;
         mDest.w = 128;
-        mDest.h = 128;                    printf( "Sprite Update SDL Error: %s\n", SDL_GetError() );
+        mDest.h = 128;
 
+        // printf("x: %d\n", mDest.x);
+        // printf("y: %d\n", mDest.y);
     };
     /**
      * Render the sprite
      */
     void Render(SDL_Renderer *ren) override
     {
-                std::cout << "sprite render" << std::endl;
-
+        // std::cout << "sprite render" << std::endl;
         SDL_RenderCopy(ren, mTexture, &mSrc, &mDest);
-                    printf( "Sprite Render SDL Error: %s\n", SDL_GetError() );
+        //printf("Sprite Render SDL Error: %s\n", SDL_GetError());
     };
     /**
      * Load a sprite

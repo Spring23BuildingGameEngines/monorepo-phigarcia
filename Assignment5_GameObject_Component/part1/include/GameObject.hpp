@@ -7,9 +7,6 @@
 #include "Component.hpp"
 #include "IGraphicsEngineRenderer.hpp"
 
-// class ControllerComponent;
-// class TransformComponent;
-// class SpriteComponent;
 
 class GameObject
 {

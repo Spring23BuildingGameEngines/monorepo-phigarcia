@@ -1,15 +1,13 @@
 # Your Information
+ 
+ Please edit the following information in your assignment
 
-*TODO*: Please edit the following information in your assignment
-
-* Name: 
-* How many hours did it take you to complete this assignment? 
-* Did you collaborate or share ideas with any other students/TAs/Professors? 
+* Name: Phi Garcia
+* How many hours did it take you to complete this assignment? 10
+* Did you collaborate or share ideas with any other students/TAs/Professors?  
 * Did you use any external resources? 
-  * (tbd if any)
-  * (tbd if any)
-  * (tbd if any)
-* (Optional) What was the most interesting part of the assignment? How would you improve this assignment?
+  * Bjorn example
+* (Optional) What was the most interesting part of the assignment? How would you improve this assignment? Felt a little lost with this one, would have felt better if the code was structured like bjorn example a bit more closely.
 
 # Assignment
 
