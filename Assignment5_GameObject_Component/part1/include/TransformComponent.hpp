@@ -3,14 +3,22 @@
 
 #include "Component.hpp"
 
-class TransformComponent : public Component{
-    public:
-        TransformComponent();
-        ~TransformComponent();
+class TransformComponent : public Component
+{
+public:
+    TransformComponent(int x, int y) : x(x), y(y){};
 
-    private:
+    TransformComponent()
+    {
+        x = 0;
+        y = 0;
+    };
 
+    ~TransformComponent(){};
+
+    int x, y;
+
+private:
 };
-
 
 #endif

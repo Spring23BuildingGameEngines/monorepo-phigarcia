@@ -22,10 +22,10 @@ struct Vec2D{
         struct {
             // Note: x,y are a convention
             // x,y could be position, but also any 2-component value.
-            float x{0};
-            float y{0};
-            float w{0};     // 'w' is a third hidden component that could be used
-                            // to determine if this is being used as a vector or a point
+            float x;
+            float y;
+            float w;     // 'w' is a third hidden component that could be used
+                          // to determine if this is being used as a vector or a point
                             // If w=0 then a vector, if w=1 then a point
         };
         float data[3]; // for convenience if you want to access as 'data' or pass Vec2D as an array 

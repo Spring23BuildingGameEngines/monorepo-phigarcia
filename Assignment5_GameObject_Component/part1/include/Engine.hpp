@@ -7,8 +7,10 @@
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>
+#include <memory>
 
 #include "IGraphicsEngineRenderer.hpp"
+#include "GameObject.hpp"
 
 /**
  * This class sets up the main game engine
@@ -60,6 +62,8 @@ private:
     // Engine Subsystem
     // Setup the Graphics Rendering Engine
     IGraphicsEngineRenderer* mRenderer = nullptr;
+    std::vector<std::shared_ptr<GameObject>>  m_gameObjects; 
+
 };
 
 #endif
