@@ -1,15 +1,13 @@
 # Your Information
 
-*TODO*: Please edit the following information in your assignment
+Please edit the following information in your assignment
 
-* Name: 
-* How many hours did it take you to complete this assignment? 
-* Did you collaborate or share ideas with any other students/TAs/Professors? 
+* Name: Phi Garcia
+* How many hours did it take you to complete this assignment? 2
+* Did you collaborate or share ideas with any other students/TAs/Professors? No, but I looked at other slides to get an idea of what people were writing
 * Did you use any external resources? 
-  * (tbd if any)
-  * (tbd if any)
-  * (tbd if any)
-* (Optional) What was the most interesting part of the assignment? How would you improve this assignment?
+  * Unreal documentation
+* (Optional) What was the most interesting part of the assignment? How would you improve this assignment? I enjoyed the assignment, it was easy and informational, no critiques!
 
 # Assignment
 
