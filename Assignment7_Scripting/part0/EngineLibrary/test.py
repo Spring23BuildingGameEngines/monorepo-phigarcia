@@ -19,19 +19,90 @@ import random
 # Initialize SDL
 test = mygameengine.SDLGraphicsProgram(400,400)
 
-# Our main game loop
-# Note: This is a simple game that loops for 20 iterations and then
-#       exits. 
-print("Setting up game loop")
-for i in range(0,20):
-    # Clear the screen
-    test.clear();
-    # Generate random coordinates for our box
-    x = random.randint(1,400)
-    y = random.randint(1,400)
-    test.DrawRectangle(x,y,10,10);
-    # Add a little delay
-    test.delay(100);
-    # Refresh the screen
-    test.flip();
+class Paddle:
+    def __init__(self, x, y, w, h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
 
+
+class Ball:
+    def __init__(self, x, y, w, h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.vx = 0
+        self.vy = 0
+
+player1 = Paddle(10, 200, 10, 80)
+player2 = Paddle(480, 200, 10, 80)
+ball = Ball(200, 200, 10, 10)
+
+
+def draw_paddle(p):
+    test.DrawRectangle(p.x, p.y, p.w, p.h)
+
+def draw_ball(b):
+    test.DrawRectangle(b.x - b.r, b.y - b.r, b.r * 2, b.r * 2)
+
+def draw_game():
+    draw_paddle(left_paddle)
+    draw_paddle(right_paddle)
+    draw_ball(ball)
+
+def tick():
+    # do collisions
+    # todo
+
+def main():
+    print("Setting up game loop")
+    while True:
+        # Clear the screen
+        test.clear();
+
+        # do game logic
+        tick()
+        
+        # render
+        draw_game()
+
+        # Add a little delay
+        test.delay(100)
+        # Refresh the screen
+        test.flip()
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
+
+
+
+
+
+# Our main game loop
+# print("Setting up game loop")
+
+# def input():
+#     if test.isKeyDown == true
+
+#     #get boolean from c++ function
+
+# def loop(inp, up, ren): #pointers in python
+#     inp()
+#     up()
+#     ren()
+
+
+
+# TODO Questions
+# should we be writing our code here and in bindings.cpp
+# how to get start writing input?
+# do we have to recode the game in python with all the logic
+# completely confused on how to handle input. how to start
