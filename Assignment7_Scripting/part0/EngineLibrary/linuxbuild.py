@@ -19,10 +19,10 @@ SOURCE="./src/*.cpp"
 ARGUMENTS="-D LINUX -std=c++14 -shared -fPIC"
 
 # Which directories do we want to include.
-INCLUDE_DIR="-I ./include/ -I./pybind11/include/ `python3.5 -m pybind11 --includes`"
+INCLUDE_DIR="-I ./include/ -I./pybind11/include/ `python3.10 -m pybind11 --includes`"
 
 # What libraries do we want to include
-LIBRARIES="-lSDL2 -ldl `python3.5-config --ldflags`"
+LIBRARIES="-lSDL2 -ldl `python3.10-config --ldflags`"
 
 # The name of our module
 EXECUTABLE="mygameengine.so"
