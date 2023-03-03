@@ -28,18 +28,22 @@ class Paddle:
 
 
 class Ball:
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, r):
         self.x = x
         self.y = y
-        self.w = w
-        self.h = h
+        self.r = r
         self.vx = 0
         self.vy = 0
 
-player1 = Paddle(10, 200, 10, 80)
-player2 = Paddle(480, 200, 10, 80)
-ball = Ball(200, 200, 10, 10)
+    def set_pos(self, x, y):
+        self.x = x 
+        self.y = y
 
+player1 = Paddle(10, 160, 10, 80)
+player2 = Paddle(380, 160, 10, 80)
+ball = Ball(200, 200, 7)
+ball.vx = 5
+ball.vy = 5
 
 def draw_paddle(p):
     test.DrawRectangle(p.x, p.y, p.w, p.h)
@@ -48,20 +52,61 @@ def draw_ball(b):
     test.DrawRectangle(b.x - b.r, b.y - b.r, b.r * 2, b.r * 2)
 
 def draw_game():
-    draw_paddle(left_paddle)
-    draw_paddle(right_paddle)
+    draw_paddle(player1)
+    draw_paddle(player2)
     draw_ball(ball)
 
+def clamp_paddle(p):
+    if p.y < 0:
+        p.y = 0
+    if p.y + p.h > 400:
+        p.y = 400 - p.h
+
+def keyboard_input(): 
+    if test.isKeyDown(0):
+        player1.y += 10
+    if test.isKeyDown(1):
+        player1.y -= 10
+    if test.isKeyDown(2):
+        player2.y += 10
+    if test.isKeyDown(3):
+        player2.y -= 10
+
+
+def check_collision(b, p):
+    if b.y > p.y + p.h or b.y < p.y:
+        return
+
+    if b.x > p.x and b.x < p.x + p.w:
+        b.vx *= -1
+        b.x += b.vx * 2 # move away from the paddle
+
+
+
 def tick():
-    # do collisions
-    # todo
+    keyboard_input()
+    clamp_paddle(player1)
+    clamp_paddle(player2)
+    check_collision(ball, player1)
+    check_collision(ball, player2)
+
+    if ball.x > 390:
+        ball.set_pos(200, 200)
+    elif ball.x < -390:
+        ball.set_pos(200, 200)
+        
+    if ball.y < 0 or ball.y > 400: 
+        ball.vy *= -1
+
+    ball.set_pos(ball.x + ball.vx, ball.y + ball.vy)
+
 
 def main():
     print("Setting up game loop")
     while True:
         # Clear the screen
-        test.clear();
-
+        test.clear()
+        test.loop()
         # do game logic
         tick()
         
@@ -69,40 +114,9 @@ def main():
         draw_game()
 
         # Add a little delay
-        test.delay(100)
+        test.delay(30)
         # Refresh the screen
         test.flip()
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-# Our main game loop
-# print("Setting up game loop")
-
-# def input():
-#     if test.isKeyDown == true
-
-#     #get boolean from c++ function
-
-# def loop(inp, up, ren): #pointers in python
-#     inp()
-#     up()
-#     ren()
-
-
-
-# TODO Questions
-# should we be writing our code here and in bindings.cpp
-# how to get start writing input?
-# do we have to recode the game in python with all the logic
-# completely confused on how to handle input. how to start
